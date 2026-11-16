@@ -1,4 +1,4 @@
-# GoTicket — DevPool Edition
+# GoTicket - DevPool Edition
 
 Sistema Full-Stack de gerenciamento de usuários, desenvolvido como projeto demonstrativo para o DevPool 2027.
 
