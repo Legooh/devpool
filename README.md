@@ -35,6 +35,10 @@ O GoTicket surgiu da necessidade de organizar processos de atendimento e tornar 
 
 O sistema foi desenvolvido utilizando uma arquitetura em camadas, separando responsabilidades para facilitar a manutenção, os testes e futuras evoluções.
 
+![Diagrama da arquitetura do GoTicket DevPool Edition](docs/assets/architecture.png)
+
+O arquivo editável do diagrama está disponível em [`docs/architecture.drawio`](docs/architecture.drawio).
+
 ```text
 GoTicket/
 ├── public/
@@ -57,6 +61,8 @@ GoTicket/
 │
 ├── docs/
 │   ├── architecture.drawio
+│   ├── assets/
+│   │   └── architecture.png
 │   └── presentation-guide.md
 │
 ├── data/
