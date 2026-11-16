@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GoTicket - DevPool Edition
 
 O GoTicket nasceu a partir de um problema real do atendimento: organizar quem
@@ -243,3 +244,7 @@ Abra [`docs/architecture.drawio`](docs/architecture.drawio) no
 - [x] Senha e hash ausentes no JSON da API;
 - [x] Persistência isolada da apresentação;
 - [x] README com instalação e exemplos de chamadas.
+=======
+# devpool
+projeto para devpool 2027
+>>>>>>> 0d1bdf45fb6175ec6fe4f8b801e529a918162555
