@@ -217,6 +217,26 @@ h2 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin: 34px 0 22px;
+  scroll-margin-top: 24px;
+}
+
+.summary-grid.section-highlight .summary-card {
+  animation: section-highlight 750ms ease-out;
+}
+
+@keyframes section-highlight {
+  0% {
+    border-color: rgba(8, 116, 67, 0.28);
+    box-shadow: 0 0 0 0 rgba(8, 116, 67, 0.18);
+  }
+  45% {
+    border-color: var(--green-700);
+    box-shadow: 0 0 0 7px rgba(8, 116, 67, 0.11);
+  }
+  100% {
+    border-color: var(--gray-200);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  }
 }
 
 .summary-card {
@@ -265,6 +285,7 @@ h2 {
 }
 
 .panel {
+  scroll-margin-top: 24px;
   overflow: hidden;
   border: 1px solid var(--gray-200);
   border-radius: 16px;

@@ -10,6 +10,9 @@ const elements = {
   totalUsers: document.querySelector("#total-users"),
   activeUsers: document.querySelector("#active-users"),
   inactiveUsers: document.querySelector("#inactive-users"),
+  overview: document.querySelector("#overview"),
+  usersSection: document.querySelector("#users"),
+  navLinks: document.querySelectorAll(".nav-link"),
   searchInput: document.querySelector("#search-input"),
   newUserButton: document.querySelector("#new-user-button"),
   userModal: document.querySelector("#user-modal"),
@@ -128,6 +131,24 @@ function render() {
   `).join("");
 }
 
+function navigateToSection(sectionId) {
+  const section = sectionId === "overview" ? elements.overview : elements.usersSection;
+  if (!section) return;
+
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  elements.navLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+    link.classList.toggle("active", isCurrent);
+    link.toggleAttribute("aria-current", isCurrent);
+  });
+
+  if (sectionId === "overview") {
+    section.classList.remove("section-highlight");
+    window.setTimeout(() => section.classList.add("section-highlight"), 20);
+    window.setTimeout(() => section.classList.remove("section-highlight"), 850);
+  }
+}
+
 async function loadUsers() {
   setLoading(true);
   try {
@@ -237,6 +258,13 @@ elements.userForm.addEventListener("submit", saveUser);
 elements.searchInput.addEventListener("input", (event) => {
   state.search = event.target.value;
   render();
+});
+
+elements.navLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateToSection(link.getAttribute("href").slice(1));
+  });
 });
 
 document.querySelectorAll("[data-close-modal]").forEach((button) => {
