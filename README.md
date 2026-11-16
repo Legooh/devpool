@@ -165,7 +165,7 @@ curl -X POST http://localhost:3000/users \
 
 Para facilitar a execução e demonstração do projeto, foi utilizado armazenamento em arquivo JSON.
 
-A persistência está isolada na camada de repositórios, permitindo que futuramente seja substituída por um banco de dados como PostgreSQL, sem exigir alterações significativas nas regras de negócio ou nas rotas da API.
+A camada de repositórios é responsável por toda a persistência dos dados, mantendo essa responsabilidade separada das demais partes da aplicação. Essa organização facilita futuras mudanças, como a adoção de um banco de dados PostgreSQL, sem impactar diretamente as regras de negócio e as rotas da API.
 
 ## Testes automatizados
 
