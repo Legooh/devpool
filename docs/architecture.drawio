@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2026-11-12T00:00:00.000Z" agent="GoTicket DevPool Edition" version="24.7.17">
+  <diagram id="goticket-architecture" name="Arquitetura">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="GoTicket - DevPool Edition | Fluxo de uma requisição" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="60" y="35" width="760" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="browser" value="&lt;b&gt;Navegador&lt;/b&gt;&lt;br&gt;HTML + CSS + JavaScript&lt;br&gt;&lt;font color='#6b7280'&gt;formulário, tabela e feedback&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontColor=#064E3B;arcSize=14;spacing=14;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="60" y="135" width="210" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="route" value="&lt;b&gt;Rotas REST&lt;/b&gt;&lt;br&gt;Express&lt;br&gt;&lt;font color='#6b7280'&gt;HTTP, JSON e status codes&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontColor=#1E3A8A;arcSize=14;spacing=14;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="340" y="135" width="210" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="service" value="&lt;b&gt;Serviço de usuários&lt;/b&gt;&lt;br&gt;Regras de negócio&lt;br&gt;&lt;font color='#6b7280'&gt;validação, unicidade e BCrypt&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontColor=#7C2D12;arcSize=14;spacing=14;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="620" y="135" width="230" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="repository" value="&lt;b&gt;Repositório&lt;/b&gt;&lt;br&gt;FileUserRepository&lt;br&gt;&lt;font color='#6b7280'&gt;isola leitura e escrita&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontColor=#4C1D95;arcSize=14;spacing=14;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="920" y="135" width="210" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="file" value="&lt;b&gt;Persistência&lt;/b&gt;&lt;br&gt;data/users.json&lt;br&gt;&lt;font color='#6b7280'&gt;substituível por PostgreSQL&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#F9FAFB;strokeColor=#4B5563;fontColor=#111827;spacing=12;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="940" y="330" width="170" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="security" value="&lt;b&gt;Barreiras aplicadas&lt;/b&gt;&lt;br&gt;• validação no backend&lt;br&gt;• e-mail e login únicos&lt;br&gt;• senha convertida em hash&lt;br&gt;• hash ausente no JSON&lt;br&gt;• tamanho máximo do payload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;fontColor=#7F1D1D;arcSize=10;spacing=14;fontSize=14;align=left;" vertex="1" parent="1">
+          <mxGeometry x="620" y="320" width="230" height="145" as="geometry"/>
+        </mxCell>
+        <mxCell id="tests" value="&lt;b&gt;Testes automatizados&lt;/b&gt;&lt;br&gt;CRUD, validações, duplicidade e segurança da senha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#9CA3AF;fontColor=#374151;arcSize=10;spacing=14;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="340" y="340" width="210" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" value="JSON / HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontColor=#475569;" edge="1" parent="1" source="browser" target="route">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" value="dados" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontColor=#475569;" edge="1" parent="1" source="route" target="service">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" value="usuário válido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontColor=#475569;" edge="1" parent="1" source="service" target="repository">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" value="leitura / escrita" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontColor=#475569;" edge="1" parent="1" source="repository" target="file">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" value="verifica" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;dashed=1;strokeColor=#DC2626;fontColor=#991B1B;" edge="1" parent="1" source="service" target="security">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" value="testa API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;dashed=1;strokeColor=#9CA3AF;fontColor=#6B7280;" edge="1" parent="1" source="tests" target="route">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="A resposta percorre o caminho inverso e retorna somente os campos públicos do usuário." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;spacing=12;fontSize=14;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="60" y="535" width="1070" height="55" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

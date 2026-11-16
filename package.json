@@ -1,0 +1,23 @@
+{
+  "name": "goticket-devpool-edition",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Edição demonstrativa do GoTicket para o desafio técnico Full-Stack DevPool 2027.",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

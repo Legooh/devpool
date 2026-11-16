@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GoTicket DevPool Edition - gestão de usuários e atendentes.">
+    <title>GoTicket | Gestão de usuários</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">G</span>
+          <div>
+            <strong>GoTicket</strong>
+            <small>DevPool Edition</small>
+          </div>
+        </div>
+
+        <nav aria-label="Menu principal">
+          <a class="nav-link" href="#overview">
+            <span aria-hidden="true">▦</span> Visão geral
+          </a>
+          <a class="nav-link active" href="#users" aria-current="page">
+            <span aria-hidden="true">♙</span> Usuários
+          </a>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="online-dot" aria-hidden="true"></span>
+          API conectada
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Administração</p>
+            <h1>Gestão de usuários</h1>
+          </div>
+          <button class="button primary" id="new-user-button" type="button">
+            <span aria-hidden="true">+</span> Novo usuário
+          </button>
+        </header>
+
+        <section class="summary-grid" id="overview" aria-label="Resumo dos usuários">
+          <article class="summary-card">
+            <span class="summary-icon green" aria-hidden="true">♙</span>
+            <div>
+              <p>Total de usuários</p>
+              <strong id="total-users">0</strong>
+            </div>
+          </article>
+          <article class="summary-card">
+            <span class="summary-icon blue" aria-hidden="true">✓</span>
+            <div>
+              <p>Usuários ativos</p>
+              <strong id="active-users">0</strong>
+            </div>
+          </article>
+          <article class="summary-card">
+            <span class="summary-icon gray" aria-hidden="true">–</span>
+            <div>
+              <p>Usuários inativos</p>
+              <strong id="inactive-users">0</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" id="users">
+          <div class="panel-header">
+            <div>
+              <h2>Usuários cadastrados</h2>
+              <p>Gerencie quem pode atuar no fluxo do GoTicket.</p>
+            </div>
+            <label class="search-field">
+              <span class="sr-only">Pesquisar usuário</span>
+              <span aria-hidden="true">⌕</span>
+              <input id="search-input" type="search" placeholder="Pesquisar por nome, e-mail ou login">
+            </label>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>E-mail</th>
+                  <th>Login</th>
+                  <th>Status</th>
+                  <th class="actions-column">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body"></tbody>
+            </table>
+
+            <div class="empty-state" id="empty-state" hidden>
+              <span aria-hidden="true">♙</span>
+              <h3>Nenhum usuário encontrado</h3>
+              <p>Cadastre o primeiro usuário ou altere a pesquisa.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="modal" id="user-modal">
+      <form id="user-form" novalidate>
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Cadastro</p>
+            <h2 id="form-title">Novo usuário</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal aria-label="Fechar">×</button>
+        </div>
+
+        <input id="user-id" type="hidden">
+
+        <div class="form-grid">
+          <label class="full-width">
+            Nome completo
+            <input id="name" name="name" minlength="3" required autocomplete="name" placeholder="Ex.: Ana Souza">
+            <small>Mínimo de 3 caracteres.</small>
+          </label>
+
+          <label class="full-width">
+            E-mail
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="ana@empresa.com">
+          </label>
+
+          <label>
+            Login
+            <input id="login" name="login" minlength="3" required autocomplete="username" placeholder="ana.souza">
+          </label>
+
+          <label>
+            Senha
+            <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+            <small id="password-help">Obrigatória no cadastro.</small>
+          </label>
+
+          <label class="status-toggle full-width">
+            <span>
+              Usuário ativo
+              <small>Permite que a pessoa utilize o sistema.</small>
+            </span>
+            <input id="active" name="active" type="checkbox" checked>
+          </label>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <div class="modal-actions">
+          <button class="button secondary" type="button" data-close-modal>Cancelar</button>
+          <button class="button primary" id="save-user-button" type="submit">Salvar usuário</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal confirm-modal" id="delete-modal">
+      <div class="danger-icon" aria-hidden="true">!</div>
+      <h2>Excluir usuário?</h2>
+      <p>O usuário <strong id="delete-user-name"></strong> será removido permanentemente.</p>
+      <div class="modal-actions">
+        <button class="button secondary" type="button" data-close-delete>Cancelar</button>
+        <button class="button danger" id="confirm-delete-button" type="button">Sim, excluir</button>
+      </div>
+    </dialog>
+
+    <div class="loading-overlay" id="loading-overlay" role="status" aria-live="polite" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <span>Carregando...</span>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
